@@ -32,17 +32,13 @@ class PostController extends Controller
             'content' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    
-        // Handle image upload
+        
         $imagePath = $request->file('image')->store('public/images');
-    
-        // Create a new Post instance
+        
         $post = new Post();
         $post->title = $validated['title'];
         $post->message = $validated['content'];
         $post->user_id = auth::user()->id;
-    
-        // Store image path in the database
         $post->cover_image = str_replace('public/', '', $imagePath);
         $post->save();
     

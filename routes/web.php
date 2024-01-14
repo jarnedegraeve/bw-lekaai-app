@@ -19,9 +19,19 @@ Route::get('/', [PostController::class, 'index'])->name('index');
 
 route::resource('post', PostController::class);
 
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/profile/{user}', [AdminController::class, 'editProfile'])->name('admin.edit_profile');
+    Route::put('/admin/profile/{user}', [AdminController::class, 'updateProfile'])->name('admin.update_profile');
+});
+
+
 route::get('like/{postid}', [LikeController::class, 'like'])->name('like');
 route::get('user/{name}', [UserController::class, 'profile'])->name('profile');
+Route::put('/update-profile', [UserController::class, 'updateProfile'])->name('update_profile');
 
+
+Route::get('/profile/{name}/edit/{user_id}', [UserController::class, 'editProfile'])->name('edit_profile');
 
 Auth::routes();
 

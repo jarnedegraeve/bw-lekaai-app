@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->date('date_of_birth')->defoult('2000-01-01');
+            $table->string('profile_image')->nullable();
             $table->boolean('is_admin')->default(false);
+            $table->text('about')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

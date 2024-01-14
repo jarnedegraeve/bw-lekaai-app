@@ -21,7 +21,7 @@
                         </div>
                        
                         <div class="card-body">
-                            <img src="{{asset('storage/'.$post->cover_image)}}" alt="cover_image" width="100%" height="100%">
+                            <img src="{{ asset('storage/'.$post->cover_image) }}" alt="image" style="width:100%;height:100%;">
                         </div>
                         <div >
                             <p>{{$post->message}}</p>
@@ -32,7 +32,7 @@
                             @if(Auth::user()->id == $post->user_id)
                             <a href="{{route('post.edit',$post->id) }}">edit post</a>
                             @else
-                            <a href="{{ route('like',$post_id)}}">Like post</a>
+                            <a href="{{ route('like',$post->id)}}">Like post</a>
                             @endif
                             
                             @endauth
