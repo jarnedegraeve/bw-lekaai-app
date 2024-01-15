@@ -13,6 +13,9 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -25,9 +28,14 @@
                 </a>
 
                 @auth
-                <a href="{{route('post.create')}}">new post</a>
+                    @if(auth()->user()->is_admin)
+                        <a href="{{ route('post.create') }}" class="nav-link btn btn-primary me-2">New Post</a>
+                    @endif
+                    <a href="{{ route('contact.form') }}" class="nav-link btn btn-secondary me-2">Contact</a>
+                    <a href="{{ route('profile', Auth::user()->name) }}" class="nav-link btn btn-secondary me-2">Profile</a>
+                    <a href="{{ route('faq.index') }}" class="nav-link btn btn-secondary me-2">FAQ</a>
+                    <a href="{{ route('about') }}" class="nav-link btn btn-secondary me-2">about</a>
                 @endauth
-
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -82,5 +90,8 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

@@ -15,10 +15,15 @@ class post extends Model
     }
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+    
+    
+    return $this->hasMany(Comment::class);
+    
     }
     public function likes()
     {
         return $this->hasMany('App\Models\Like');
     }
+
+    
 }

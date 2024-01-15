@@ -47,6 +47,16 @@
 
 
                  </button>
+                 @if (auth()->check() && auth()->user()->is_admin)
+    <!-- Button to toggle admin status -->
+    <form method="post" action="{{ route('toggle_admin', $user->id) }}">
+        @csrf
+        @method('put')
+        <button type="submit" class="btn btn-primary">
+            {{ $user->is_admin ? 'Remove Admin' : 'Make Admin' }}
+        </button>
+    </form>
+@endif
                     @endif
 
                 </div>
@@ -62,31 +72,7 @@
 
                 
               
-                <div class="card">
-                    <div class="card-body">
-                        <h3>liked events</h3>
-                        @foreach($posts as $post)
-                        <div class="card">
-                            <div class="card-body">
-                                <h3>{{$post->title}}</h3>
-                            </div>
-                            <div >
-                                <p>{{$post->message}}</p>
-                            </div>
-                            <br>
-                                <small>Posted by: {{$post->user->name}} op {{$post->created_at->format('d/m/Y \o\m H:i') }} </small>
-                                @auth
-                                @if(Auth::user()->id == $post->user_id)
-                                <a href="{{route('post.edit',$post->id) }}">edit post</a>
-                                @else
-                                <a href="{{ route('like',$post_id)}}">Like post</a>
-                                @endif
-                                
-                                @endauth
-                                post heeft {{$post->likes()->count()}} likes
-                            </div>
-                        @endforeach
-                    </div>
+               
 
                 </div>
 

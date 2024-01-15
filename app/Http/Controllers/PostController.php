@@ -76,5 +76,22 @@ class PostController extends Controller
 
     }
 
+    public function destroy($id)
+{
+    $post = Post::findOrFail($id);
+
+    // Check if the authenticated user is the owner of the post
+    if (Auth::user()->id == $post->user_id) {
+        // Delete the post and associated likes
+        $post->likes()->delete(); // Delete likes associated with the post
+        $post->delete(); // Delete the post
+
+        return redirect()->route('index')->with('status', 'Post deleted!');
+    } else {
+        return redirect()->route('index')->with('status', 'You are not allowed to delete this post!');
+    }
+}
+
+
 
 }

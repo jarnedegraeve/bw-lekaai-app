@@ -85,6 +85,23 @@ class UserController extends Controller
     return redirect()->route('profile', $user->name)->with('success', 'Profile updated successfully!');
 }
 
+public function toggleAdmin($user_id)
+{
+    $user = User::findOrFail($user_id);
+
+    // Check if the authenticated user is an admin
+    if (auth()->user()->is_admin) {
+        // Toggle the admin status
+        $user->is_admin = !$user->is_admin;
+        $user->save();
+
+        return redirect()->route('profile', $user->name)->with('status', 'Admin status updated successfully!');
+    } else {
+        return redirect()->route('profile', $user->name)->with('status', 'You are not allowed to update admin status!');
+    }
+}
+
+
     
     
 }
