@@ -27,11 +27,3 @@
     - Implement a notification system to alert admins when products are about to expire.
       - Admins receive an email notification as a reminder.
 
-## Contributing
-Feel free to contribute to the project by submitting issues or pull requests. Please follow the project's coding standards and guidelines.
-
-## License
-This project is licensed under the [Your License Name] - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgments
-- Special thanks to the contributors and the community for their valuable input and support.
